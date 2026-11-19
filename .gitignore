@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+.expo-shared/
+.expo-tmp/
+.expo-verify-dist/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native prebuild folders
+android/
+ios/
+
+# Build & signing secrets
+*.jks
+*.keystore
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+# Environment & logs
+.env
+.env.*
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# OS / Editor
+.DS_Store
+Thumbs.db
