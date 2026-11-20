@@ -454,6 +454,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   );
 
   const isArchive = viewMode === 'archive';
+  const fabBottom = Math.max(insets.bottom, 16) + 16;
 
   const subtitleText = isArchive
     ? `${String(viewNotes.length).padStart(2, '0')} ARCHIVED ${
@@ -684,7 +685,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       )}
 
       {/* Notes List + Sibling Drag Rail (outside ScrollView so touch #1 drags immediately!) */}
-      <View style={styles.listWrap}>
+      <View collapsable={false} style={styles.listWrap}>
         <FlatList
           data={visibleNotes}
           keyExtractor={keyExtractor}
@@ -699,7 +700,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           contentContainerStyle={[
             styles.listContent,
             visibleNotes.length === 0 && styles.emptyListContent,
-            { paddingBottom: Math.max(insets.bottom, 16) + 104 },
+            { paddingBottom: fabBottom + 88 },
           ]}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
@@ -770,7 +771,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         {canDrag && (
           <View
             collapsable={false}
-            style={styles.dragRail}
+            style={[styles.dragRail, { bottom: fabBottom + 64 }]}
             {...railPanResponder.panHandlers}
           />
         )}
@@ -784,7 +785,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {
             backgroundColor: theme.fabBg,
             borderTopColor: theme.accent,
-            bottom: Math.max(insets.bottom, 16) + 16,
+            bottom: fabBottom,
             transform: [{ scale: pressed ? 0.94 : 1 }],
           },
         ]}
@@ -942,7 +943,6 @@ const styles = StyleSheet.create({
   dragRail: {
     position: 'absolute',
     top: 0,
-    bottom: 0,
     right: 18,
     width: 48,
     zIndex: 10,
@@ -1025,5 +1025,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.18,
     shadowRadius: 8,
     elevation: 6,
+    zIndex: 20,
   },
 });
